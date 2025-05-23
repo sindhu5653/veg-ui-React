@@ -5,6 +5,8 @@ import About from './pages/about/About'
 import Contact from './pages/contact/Contact'
 import Navbar from './components/Navbar'
 import axios from 'axios'
+import { BsTypeH1 } from 'react-icons/bs'
+import Productdetails from './pages/products/Productdetails'
 
 const App = () => {
   const [data, setData] = useState([])
@@ -34,6 +36,8 @@ const App = () => {
         <Route path='/' element={<Home data={data} />} />
         <Route path='/about' element={<About />} />
         <Route path='/contact' element={<Contact />} />
+        <Route path='/productdetails/:id' element={<Productdetails/>}/>
+        <Route path='*' element={<h1>Unauthorized</h1>} />
       </Routes>
     </div>
   )

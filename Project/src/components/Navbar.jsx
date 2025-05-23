@@ -53,7 +53,7 @@ const Navbar = () => {
         <div className='flex flex-row gap-8 text-2xl mt-4'>
           <BsHandbag className=' hover:text-green-400' />
           <div className='relative'>
-            <CiUser onClick={() => setOpenDropDown(!openDropDown)} className=' hover:text-green-500 mr-5' />
+            <CiUser onClick={() => setOpenDropDown(!openDropDown)} className=' hover:text-green-500 ' />
             <div className='absolute right-0'>
               {
                 openDropDown ? <User /> : <></>
