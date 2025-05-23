@@ -7,6 +7,7 @@ import Navbar from './components/Navbar'
 import axios from 'axios'
 import { BsTypeH1 } from 'react-icons/bs'
 import Productdetails from './pages/products/Productdetails'
+import Review from './pages/review/Review'
 
 const App = () => {
   const [data, setData] = useState([])
@@ -37,6 +38,7 @@ const App = () => {
         <Route path='/about' element={<About />} />
         <Route path='/contact' element={<Contact />} />
         <Route path='/productdetails/:id' element={<Productdetails/>}/>
+        <Route path='/review' element={<Review/>}/>
         <Route path='*' element={<h1>Unauthorized</h1>} />
       </Routes>
     </div>
