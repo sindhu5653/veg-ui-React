@@ -44,7 +44,7 @@ const Navbar = () => {
         </div> */}
 
         <div className=' rounded-md shadow-md flex items-center w-2/5 justify-between  '>
-          <input type="text" placeholder='Search Your Products' className='outline-none py-2 px-4 w-full' name="" id="" />
+          <input type="text" placeholder='Search for Products and Category' className='outline-none py-2 px-2 w-full' name="" id="" />
           <div className='bg-green-500 w-[40px] h-[40px] flex items-center justify-center rounded-md'>
             <FaSearch color='#fefefe' />
           </div>
@@ -66,7 +66,7 @@ const Navbar = () => {
 
       </div>
 
-      <div className='flex gap-5 items-center justify-center py-2 bg-yellow-300'>
+      <div className='flex gap-5 items-center justify-center py-2 bg-green-200'>
         <div className=' flex gap-7 font-semibold'>
           <Link to="/">Home</Link>
           <Link to="/about">About</Link>
