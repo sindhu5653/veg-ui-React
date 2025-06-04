@@ -1,16 +1,19 @@
-import React  from 'react'
+import React from 'react'
 
-const Images = ({item}) => {
-  if (!item || !item.images) return null;
+const Images = ({ images,selectImage }) => {
+
   return (
-    <div className='w-[100px]'>
-    
-        {item.images.map((image,index)=>(
-        <img key={index} src={image} alt={`product-${index}`}/>
-        ))}
-        
+    <div className='w-[70px] mt-8'>
+
+      {images.map((image, index) => (
+        <img key={index} src={image} alt={`product-${index}`}
+        className='hover:border-3 hover:border-green-600 cursor-pointer border mt-1'
+         onClick={() => selectImage(image)} />
+      ))}
+
     </div>
   )
 }
+
 
 export default Images;

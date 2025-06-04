@@ -12,7 +12,7 @@ const Card = ({ item }) => {
 
   return (
 
-    <div className='flex flex-wrap bg-white p-4 rounded-md shadow-2xl w-[150px] h-[350px] mx-auto text-black '>
+    <div className='flex flex-wrap bg-white p-4 rounded-md shadow-2xl w-[180px] h-[350px] mx-auto text-black '>
 
       <Link to={`productdetails/${item.id}`}>
         <div>
@@ -34,10 +34,10 @@ const Card = ({ item }) => {
 
         <div className='flex flex-col items-center justify-between gap-2 ' >
           <div>
-            <IoEyeOutline className='bg-[#c4c0c4] rounded-full border-none hover:bg-green-400 text-white w-[25px] h-[25px] ml-25' />
+            <IoEyeOutline className='bg-[#c4c0c4] rounded-full border-none hover:bg-green-400 text-white w-[25px] h-[25px] ml-32' />
           </div>
           <div className='mb-2'>
-            <CiCirclePlus className='bg-[#c4c0c4] rounded-full hover:bg-green-400 text-white items-center justify-center w-[25px] h-[25px] ml-25' />
+            <CiCirclePlus className='bg-[#c4c0c4] rounded-full hover:bg-green-400 text-white items-center justify-center w-[25px] h-[25px] ml-32' />
           </div>
         </div>
       </div>
