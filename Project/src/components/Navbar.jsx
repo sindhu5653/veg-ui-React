@@ -2,7 +2,7 @@ import React, { useEffect, useState } from 'react'
 import { Link } from 'react-router-dom';
 import { BsHandbag } from "react-icons/bs";
 import { CiUser } from "react-icons/ci";
-import { FaSearch } from "react-icons/fa";
+import { CiSearch } from "react-icons/ci";
 import More from '../pages/more/More';
 import User from '../pages/user/User';
 
@@ -45,8 +45,8 @@ const Navbar = () => {
 
         <div className=' rounded-md shadow-md flex items-center w-2/5 justify-between  '>
           <input type="text" placeholder='Search for Products and Category' className='outline-none py-2 px-2 w-full' name="" id="" />
-          <div className='bg-[#59d99b] w-[40px] h-[40px] flex items-center justify-center rounded-md'>
-            <FaSearch color='#fefefe' />
+          <div className='w-[40px] h-[40px] flex items-center justify-center rounded-md'>
+            <CiSearch color='#59d99b' size={26} />
           </div>
         </div>
 
@@ -76,6 +76,12 @@ const Navbar = () => {
           <More />
         </div>
       </div>
+
+      {/* <div>
+        <img 
+        className='w-full'
+        src="" alt="image" />
+      </div> */}
 
     </div>
 

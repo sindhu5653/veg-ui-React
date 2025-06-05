@@ -5,8 +5,10 @@ import Review from '../review/Review';
 import Description from '../description/Description';
 import Images from '../images/Images';
 import { MdOutlineKeyboardArrowLeft } from "react-icons/md";
+import { toast } from 'react-toastify';
 
 const Productdetails = () => {
+    
     const navigate = useNavigate()
     const params = useParams()
     // console.log(params.id)
@@ -25,8 +27,6 @@ const Productdetails = () => {
             setProducts(response.data);
             console.log(response.data)
             setImages(response.data.images[0])
-
-
         }
         catch (error) {
             console.error(error);
@@ -38,7 +38,7 @@ const Productdetails = () => {
                 <button
                     onClick={() => navigate('/')}
                     className='flex bg-[#2de089] text-black px-4 py-2 rounded hover:bg-black hover:text-green-500 mt-4 ml-4'>
-                    <MdOutlineKeyboardArrowLeft className='size-6'/> 
+                    <MdOutlineKeyboardArrowLeft className='size-6' />
                     Go Back</button>
             </div>
             <div className='flex flex-col lg:flex-row gap-10 lg:gap-20 justify-evenly'>
@@ -47,7 +47,7 @@ const Productdetails = () => {
                 </div>
 
                 <div className='flex flex-col lg:flex-row gap-10 lg:gap-20 items-center lg:items-start'>
-                    <div className='w-[400px] flex flex-col items-center justify-center  text-center lg:text-left'>
+                    <div className='w-[200px] flex flex-col items-center justify-center  text-center lg:text-left'>
                         {/* <h1 className='text-center text-3xl mt-3'>{products?.title}</h1> */}
                         <img className='w-[300px]' src={images} alt="selected" />
                         {/* <p>${products?.price}</p> */}
@@ -59,20 +59,21 @@ const Productdetails = () => {
                             <h1 className='text-4xl mt-3'>{products?.title}</h1>
                             <div className='flex gap-80'>
                                 {/* <p className='mt-6'>${count}</p> */}
-                                <p className='mt-5 text-2xl'>${products?.price}</p>
-                                <div className='flex gap-8 mt-10'>
-                                    <div className='border w-[40px] h-[40px] text-center bg-[#2de089] text-white hover:bg-black hover:text-green-500'>
-                                        <button className='mt-1.5' onClick={() => setCount(products?.price * 2)}>+</button>
+                                <p className='mt-5 text-2xl'>${(products?.price * count)}</p>
+                                <div className='flex gap-8 mt-10 border border-green-400 rounded-md'>
+                                    <div className='border rounded-md w-[40px] h-[40px] text-center bg-[#2de089] text-white hover:bg-black hover:text-green-500'>
+                                        <button className='text-2xl' onClick={() => setCount(count => count + 1)}>+</button>
                                     </div>
-
-                                    <div className='border w-[40px] h-[40px] text-center  bg-[#2de089] text-white hover:bg-black hover:text-green-500'>
-                                        <button className='mt-1.5' onClick={() => (products?.price * 2)}>-</button>
+                                    <span className='text-1xl mt-2 font-semibold w-[20px] text-center rounded-md'>{count}</span>
+                                    <div className='border rounded-md w-[40px] h-[40px] text-center  bg-[#2de089] text-white hover:bg-black hover:text-green-500'>
+                                        <button className=' text-3xl' onClick={() => setCount(count => (count > 1 ? count - 1 : 1))}>-</button>
                                     </div>
                                 </div>
                             </div>
                             <div className='flex flex-col sm:flex-row gap-4 w-full mt-6'>
                                 <div className='bg-[#2de089] text-white px-2 py-3 font-semibold hover:bg-black hover:text-green-500'>
-                                    <button className='w-[150px]'>Add to Cart</button>
+                                    <button className='w-[150px]'
+                                     onClick={() => toast.success("Added to cart!")}>Add to Cart</button>
                                 </div>
                                 <div className='bg-[#2de089] text-white px-2 py-3 font-semibold hover:bg-black hover:text-green-500'>
                                     <button className='w-[150px]'>Buy Now</button>
@@ -84,14 +85,14 @@ const Productdetails = () => {
                 </div>
             </div>
 
-            <div className='flex gap-20 justify-center mt-10 text-2xl text-gray-500 font-semibold '>
+            <div className='flex gap-20 justify-center mt-10 text-2xl text-gray-500 font-semibold mb-3'>
                 <h2 onClick={() => setShowDiscription(true)} className='hover:text-green-500 hover:underline' >Description</h2>
                 <h2 onClick={() => setShowDiscription(false)} className='hover:text-green-500 hover:underline' >Review </h2>
             </div>
 
             <div>
                 {
-                    showDiscription ? <Description /> : <Review />
+                   showDiscription ? <Description /> : <Review />
                 }
             </div>
 

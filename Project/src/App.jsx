@@ -5,31 +5,42 @@ import About from './pages/about/About'
 import Contact from './pages/contact/Contact'
 import Navbar from './components/Navbar'
 import axios from 'axios'
-import { BsTypeH1 } from 'react-icons/bs'
 import Productdetails from './pages/products/Productdetails'
-import Review from './pages/review/Review'
-import Description from './pages/description/Description'
+import { ToastContainer } from 'react-toastify';
 
 const App = () => {
+  const [cart, setCart] = useState({
+    id: "1",
+    product: "phone",
+    quantity: "2"
+  })
   const [data, setData] = useState([])
   // console.log(data);
 
+  let cartItems = localStorage.getItem('cart')
+  console.log(JSON.parse(cartItems), 'items display')
 
   useEffect(() => {
-      fetchProducts()
+    fetchProducts()
+    setLocalstorage()
   }, [])
 
-  async function fetchProducts() {
-      try {
-          const response = await axios.get('https://dummyjson.com/products');
-          // console.log(response, 'displayed');
-          const data = response.data;
-          // console.log(data);
-          setData(data.products)
+  async function setLocalstorage() {
+    localStorage.setItem("cart", JSON.stringify(cart))
+  }
 
-      } catch (error) {
-          console.log(error);
-      }
+
+  async function fetchProducts() {
+    try {
+      const response = await axios.get('https://dummyjson.com/products');
+      // console.log(response, 'displayed');
+      const data = response.data;
+      // console.log(data);
+      setData(data.products)
+
+    } catch (error) {
+      console.log(error);
+    }
   }
   return (
     <div>
@@ -38,9 +49,14 @@ const App = () => {
         <Route path='/' element={<Home data={data} />} />
         <Route path='/about' element={<About />} />
         <Route path='/contact' element={<Contact />} />
-        <Route path='/productdetails/:id' element={<Productdetails/>}/>
-        <Route path='*' element={<h1>Unauthorized</h1>} />
+        <Route path='/productdetails/:id' element={<Productdetails />} />
+        <Route path='*' element={<h1>Page not found</h1>} />
       </Routes>
+
+      <ToastContainer
+        position="top-right"
+        autoClose={5000}
+        theme='dark' />
     </div>
   )
 }
