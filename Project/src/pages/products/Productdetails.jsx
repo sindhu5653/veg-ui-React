@@ -60,7 +60,7 @@ const Productdetails = () => {
                             <div className='flex gap-80'>
                                 {/* <p className='mt-6'>${count}</p> */}
                                 <p className='mt-5 text-2xl'>${(products?.price * count)}</p>
-                                <div className='flex gap-8 mt-10 border border-green-400 rounded-md'>
+                                <div className='flex gap-4 mt-10 border border-green-400 rounded-md'>
                                     <div className='border rounded-md w-[40px] h-[40px] text-center bg-[#2de089] text-white hover:bg-black hover:text-green-500'>
                                         <button className='text-2xl' onClick={() => setCount(count => count + 1)}>+</button>
                                     </div>

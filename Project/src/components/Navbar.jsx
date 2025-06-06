@@ -5,6 +5,8 @@ import { CiUser } from "react-icons/ci";
 import { CiSearch } from "react-icons/ci";
 import More from '../pages/more/More';
 import User from '../pages/user/User';
+import Signup from '../pages/auth/Signup';
+import Cart from '../pages/cart/Cart';
 
 const Navbar = () => {
   const [openDropDown, setOpenDropDown] = useState(false)
@@ -51,13 +53,18 @@ const Navbar = () => {
         </div>
 
         <div className='flex flex-row gap-8 text-2xl mt-4'>
+          <div>
+            <Link to="/cart">
           <BsHandbag className=' hover:text-green-400' />
+          </Link>
+          </div>
           <div className='relative'>
             <CiUser onClick={() => setOpenDropDown(!openDropDown)} className=' hover:text-green-500 ' />
             <div className='absolute right-0'>
               {
                 openDropDown ? <User /> : <></>
               }
+              
             </div>
           </div>
 

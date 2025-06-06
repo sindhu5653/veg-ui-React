@@ -7,6 +7,9 @@ import Navbar from './components/Navbar'
 import axios from 'axios'
 import Productdetails from './pages/products/Productdetails'
 import { ToastContainer } from 'react-toastify';
+import Signup from './pages/auth/Signup'
+import Login from './pages/auth/Login'
+import Cart from './pages/cart/Cart'
 
 const App = () => {
   const [cart, setCart] = useState({
@@ -50,6 +53,9 @@ const App = () => {
         <Route path='/about' element={<About />} />
         <Route path='/contact' element={<Contact />} />
         <Route path='/productdetails/:id' element={<Productdetails />} />
+        <Route path='/signup' element={<Signup />} />
+        <Route path='/login' element={<Login />} />
+        <Route path='/cart' element={<Cart/>}></Route>
         <Route path='*' element={<h1>Page not found</h1>} />
       </Routes>
 
