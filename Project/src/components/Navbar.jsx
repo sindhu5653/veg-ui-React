@@ -1,31 +1,33 @@
-import React, { useEffect, useState } from 'react'
+import React, { useEffect, useRef, useState } from 'react'
 import { Link } from 'react-router-dom';
 import { BsHandbag } from "react-icons/bs";
 import { CiUser } from "react-icons/ci";
 import { CiSearch } from "react-icons/ci";
 import More from '../pages/more/More';
 import User from '../pages/user/User';
-import Signup from '../pages/auth/Signup';
 import Cart from '../pages/cart/Cart';
 
 const Navbar = () => {
-  const [openDropDown, setOpenDropDown] = useState(false)
-  console.log(openDropDown)
+  const [openDropDown, setOpenDropDown] = useState(false);
+  // console.log(openDropDown)
+  const myRef = useRef(null);
 
-  // useEffect(() => {
-  //   const handleClickOutside = () => {
-  //    if(openDropDown===true){
-  //     setOpenDropDown(false);
-  //    }
-  //   };
+  useEffect(() => {
+    const handleClickOutside = (e) => {
+      if (myRef.current && !myRef.current.contains(e.target)) {
+        setOpenDropDown(false);
+      }
+    };
 
-  //   document.body.addEventListener("click", handleClickOutside);
+    document.addEventListener('mousedown', handleClickOutside);
 
-  //   // Cleanup on unmount
-  //   return () => {
-  //     document.body.removeEventListener("click", handleClickOutside);
-  //   };
-  // }, []);
+
+    //   // Cleanup on unmount
+    return () => {
+      document.removeEventListener('mousedown', handleClickOutside);
+    };
+  }, []);
+
   return (
     <div>
       <div className='flex justify-between  items-center py-4 px-12'>
@@ -55,25 +57,22 @@ const Navbar = () => {
         <div className='flex flex-row gap-8 text-2xl mt-4'>
           <div>
             <Link to="/cart">
-          <BsHandbag className=' hover:text-green-400' />
-          </Link>
+              <BsHandbag className=' hover:text-green-400' />
+            </Link>
           </div>
-          <div className='relative'>
+          <div className='relative' ref={myRef}>
             <CiUser onClick={() => setOpenDropDown(!openDropDown)} className=' hover:text-green-500 ' />
-            <div className='absolute right-0'>
+            <div className='absolute right-0 z-50'>
               {
                 openDropDown ? <User /> : <></>
               }
-              
+
             </div>
           </div>
-
         </div>
-
-
       </div>
 
-      <div className='flex gap-5 items-center justify-center py-2 bg-[#59d99b]'>
+      <div className='flex gap-5 items-center justify-center py-2 '>
         <div className=' flex gap-7 font-semibold'>
           <Link to="/">Home</Link>
           <Link to="/about">About</Link>
@@ -83,12 +82,6 @@ const Navbar = () => {
           <More />
         </div>
       </div>
-
-      {/* <div>
-        <img 
-        className='w-full'
-        src="" alt="image" />
-      </div> */}
 
     </div>
 

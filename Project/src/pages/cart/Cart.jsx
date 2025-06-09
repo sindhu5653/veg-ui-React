@@ -18,19 +18,19 @@ const Cart = () => {
 
             <div className='flex gap-20 items-center bg-white border border-gray-200 rounded-md mt-3 mx-auto w-fit px-2 py-4'>
                 <div >
-                    < HiOutlineShoppingCart className='size-6 mx-auto' />
+                    < HiOutlineShoppingCart className='size-6 mx-auto hover:text-green-500' />
                     <h1 className='text-sm'>My Cart</h1>
                 </div>
                 <div>
-                    <CiLocationOn className='size-6 mx-auto' />
+                    <CiLocationOn className='size-6 mx-auto  hover:text-green-500' />
                     <h1 className='text-sm'>Shipping</h1>
                 </div>
                 <div>
-                    <MdOutlinePayment className='size-6 mx-auto' />
+                    <MdOutlinePayment className='size-6 mx-auto  hover:text-green-500' />
                     <h1 className='text-sm'>Payment</h1>
                 </div>
                 <div>
-                    <TiTick className='size-6 mx-auto' />
+                    <TiTick className='size-6 mx-auto  hover:text-green-500' />
                     <h1 className='text-sm'>Success</h1>
                 </div>
             </div>
