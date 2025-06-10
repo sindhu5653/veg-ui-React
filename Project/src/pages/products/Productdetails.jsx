@@ -1,5 +1,5 @@
 import axios from 'axios';
-import React, { useEffect, useState } from 'react'
+import { useEffect, useState } from 'react'
 import { useNavigate, useParams } from 'react-router-dom'
 import Review from '../review/Review';
 import Description from '../description/Description';
@@ -8,14 +8,14 @@ import { MdOutlineKeyboardArrowLeft } from "react-icons/md";
 import { toast } from 'react-toastify';
 
 const Productdetails = () => {
-    
+
     const navigate = useNavigate()
     const params = useParams()
-    // console.log(params.id)
+    console.log(params.id)
     const [products, setProducts] = useState();
     const [showDiscription, setShowDiscription] = useState(true)
     const [images, setImages] = useState(null);
-    const [count, setCount] = useState(1)
+    const [count, setCount] = useState(1);
 
     useEffect(() => {
         fetchProduct()
@@ -32,6 +32,8 @@ const Productdetails = () => {
             console.error(error);
         }
     }
+
+
     return (
         <div>
             <div >
@@ -73,7 +75,7 @@ const Productdetails = () => {
                             <div className='flex flex-col sm:flex-row gap-4 w-full mt-6'>
                                 <div className='bg-[#2de089] text-white px-2 py-3 font-semibold hover:bg-black hover:text-green-500'>
                                     <button className='w-[150px]'
-                                     onClick={() => toast.success("Added to cart!")}>Add to Cart</button>
+                                        onClick={() => toast.success("Added to cart!")}>Add to Cart</button>
                                 </div>
                                 <div className='bg-[#2de089] text-white px-2 py-3 font-semibold hover:bg-black hover:text-green-500'>
                                     <button className='w-[150px]'>Buy Now</button>
@@ -92,7 +94,7 @@ const Productdetails = () => {
 
             <div>
                 {
-                   showDiscription ? <Description /> : <Review />
+                    showDiscription ? <Description /> : <Review />
                 }
             </div>
 

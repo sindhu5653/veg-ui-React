@@ -1,4 +1,4 @@
-import React, { useEffect, useRef, useState } from 'react'
+import { useEffect, useRef, useState } from 'react'
 import { Link } from 'react-router-dom';
 import { BsHandbag } from "react-icons/bs";
 import { CiUser } from "react-icons/ci";
@@ -11,6 +11,8 @@ const Navbar = () => {
   const [openDropDown, setOpenDropDown] = useState(false);
   // console.log(openDropDown)
   const myRef = useRef(null);
+  const [totalQuantity, setTotalQuantity] = useState(0);
+
 
   useEffect(() => {
     const handleClickOutside = (e) => {
@@ -28,15 +30,37 @@ const Navbar = () => {
     };
   }, []);
 
+  useEffect(() => {
+  const updateCartQuantity = () => {
+    const cart = JSON.parse(localStorage.getItem('cart')) || [];
+    const total = cart.reduce((acc, item) => acc + item.quantity, 0);
+    setTotalQuantity(total);
+  };
+
+  updateCartQuantity(); 
+  const interval = setInterval(updateCartQuantity, 1000); 
+
+  window.addEventListener('storage', updateCartQuantity);
+
+  return () => {
+    clearInterval(interval);
+    window.removeEventListener('storage', updateCartQuantity);
+  };
+}, []);
+
+
+
   return (
     <div>
-      <div className='flex justify-between  items-center py-4 px-12'>
+      <div className='flex justify-between items-center py-4 px-12'>
         <div>
-          <img
-            width={60}
-            height={60}
-            className='mt-2 ml-3'
-            src="https://mir-s3-cdn-cf.behance.net/project_modules/hd/05ddda120585343.60b4e6fc1383b.png" alt="grocery store" />
+          <Link to="/">
+            <img
+              width={60}
+              height={60}
+              className='mt-2 ml-3'
+              src="https://mir-s3-cdn-cf.behance.net/project_modules/hd/05ddda120585343.60b4e6fc1383b.png" alt="grocery store" />
+          </Link>
         </div>
 
         {/* <div className='flex flex-row justify-between '>
@@ -55,9 +79,14 @@ const Navbar = () => {
         </div>
 
         <div className='flex flex-row gap-8 text-2xl mt-4'>
-          <div>
+          <div className='relative'>
             <Link to="/cart">
               <BsHandbag className=' hover:text-green-400' />
+              {totalQuantity > 0 && (
+                <span className="absolute -top-2 -right-2 bg-red-500 text-white text-xs w-5 h-5 flex items-center justify-center rounded-full">
+                  {totalQuantity}
+                </span>
+              )}
             </Link>
           </div>
           <div className='relative' ref={myRef}>

@@ -6,8 +6,16 @@ const Card = ({ item }) => {
   // console.log(item,'items');
 
   const navigate = useNavigate();
-  const handleClick=()=>{
-  navigate(`/productdetails/${item.id}`);
+  const handleClick = () => {
+    navigate(`/productdetails/${item.id}`);
+  }
+  async function handleAddToCart() {
+    console.log('clicked')
+    const cartItem = {
+      product: item,
+      quantity: 1
+    };
+    localStorage.setItem('cart', JSON.stringify(cartItem));
   }
 
   return (
@@ -31,11 +39,11 @@ const Card = ({ item }) => {
         </div>
 
         <div className='flex flex-col gap-2 mt-3' >
-          
-            <IoEyeOutline onClick={handleClick} className='bg-[#c4c0c4] rounded-full border-none hover:bg-green-400 text-white flex w-[25px] h-[25px] cursor-pointer' />
-          
-            <CiCirclePlus className='bg-[#c4c0c4] rounded-full hover:bg-green-400 text-white flex w-[25px] h-[25px] cursor-pointer ' />
-          
+
+          <IoEyeOutline onClick={handleClick} className='bg-[#c4c0c4] rounded-full border-none hover:bg-green-400 text-white flex w-[25px] h-[25px] cursor-pointer' />
+
+          <CiCirclePlus onClick={handleAddToCart} className='bg-[#c4c0c4] rounded-full hover:bg-green-400 text-white flex w-[25px] h-[25px] cursor-pointer ' />
+
         </div>
       </div>
 

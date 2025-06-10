@@ -1,4 +1,4 @@
-import React, { useEffect, useState } from 'react'
+import { useEffect, useState } from 'react'
 import { Route, Routes } from 'react-router-dom'
 import Home from './pages/home/Home'
 import About from './pages/about/About'
@@ -12,25 +12,25 @@ import Login from './pages/auth/Login'
 import Cart from './pages/cart/Cart'
 
 const App = () => {
-  const [cart, setCart] = useState({
-    id: "1",
-    product: "phone",
-    quantity: "2"
-  })
-  const [data, setData] = useState([])
-  // console.log(data);
+  // const [cart, setCart] = useState({
+  //   id: "1",
+  //   product: "phone",
+  //   quantity: "2"
+  // })
+   const [data, setData] = useState([])
+  // // console.log(data);
 
-  let cartItems = localStorage.getItem('cart')
-  console.log(JSON.parse(cartItems), 'items display')
+  // let cartItems = localStorage.getItem('cart')
+  // console.log(JSON.parse(cartItems), 'items display')
 
-  useEffect(() => {
-    fetchProducts()
-    setLocalstorage()
-  }, [])
+   useEffect(() => {
+     fetchProducts()
+  //   setLocalstorage()
+   }, [])
 
-  async function setLocalstorage() {
-    localStorage.setItem("cart", JSON.stringify(cart))
-  }
+  // async function setLocalstorage() {
+  //   localStorage.setItem("cart", JSON.stringify(cart))
+  // }
 
 
   async function fetchProducts() {
