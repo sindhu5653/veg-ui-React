@@ -8,80 +8,96 @@ import axios from 'axios';
 import { useParams } from 'react-router-dom';
 
 const Cart = () => {
-  const [cartData, setCartData] = useState([]);
-  const { id } = useParams();
+    const [cartData, setCartData] = useState([]);
 
-  useEffect(() => {
-    const storedCart = JSON.parse(localStorage.getItem('cart')) || [];
-    setCartData(storedCart);
-  }, []);
+    useEffect(() => {
+        fetchLocalStorageData()
+        calculateTotalCartQuantity()
+    }, [])
 
-  useEffect(() => {
-    if (id) {
-      checkAndAddToCart(id);
+    async function fetchLocalStorageData() {
+        const data = localStorage.getItem('cart')
+        setCartData(JSON.parse(data))
     }
-    // eslint-disable-next-line react-hooks/exhaustive-deps
-  }, [id]);
 
-  async function checkAndAddToCart(productId) {
-    let cart = [...cartData];
-    const productIdNum = Number(productId);
-
-    const itemInCart = cart.find(
-      (item) => item.productdata?.ProductId === productIdNum
-    );
-
-    if (itemInCart) {
-      cart = cart.map((item) => {
-        if (item.productdata.ProductId === productIdNum) {
-          return {
-            ...item,
-            quantity: item.quantity + 1,
-          };
-        }
-        return item;
-      });
-
-      setCartData(cart);
-      localStorage.setItem('cart', JSON.stringify(cart));
-      console.log('Incremented quantity for product:', productIdNum);
-    } else {
-      try {
-        const response = await axios.get(
-          `https://dummyjson.com/products/${productIdNum}`
-        );
-
-        const productdata = {
-          ProductId: response.data.id,
-          title: response.data.title,
-          price: response.data.price,
-          thumbnail: response.data.thumbnail,
-        };
-
-        const newItem = {
-          productdata,
-          quantity: 1,
-        };
-
-        cart = [...cart, newItem];
-        setCartData(cart);
-        localStorage.setItem('cart', JSON.stringify(cart));
-        console.log('Product added to cart:', productdata);
-      } catch (error) {
-        console.error('Error fetching product:', error);
-      }
+    async function calculateTotalCartQuantity() {
+        const totalQuantity = cartData.reduce((prev, curr) => {
+            return prev + curr.quantity;
+        }, 0);
+        console.log(totalQuantity)
     }
-  }
+    // const { id } = useParams();
+
+    // useEffect(() => {
+    //   const storedCart = JSON.parse(localStorage.getItem('cart')) || [];
+    //   setCartData(storedCart);
+    // }, []);
+
+    // useEffect(() => {
+    //   if (id) {
+    //     checkAndAddToCart(id);
+    //   }
+    // }, [id]);
+
+    // async function checkAndAddToCart(productId) {
+    //   let cart = [...cartData];
+    //   const productIdNum = Number(productId);
+
+    //   const itemInCart = cart.find(
+    //     (item) => item.productdata?.ProductId === productIdNum
+    //   );
+
+    //   if (itemInCart) {
+    //     cart = cart.map((item) => {
+    //       if (item.productdata.ProductId === productIdNum) {
+    //         return {
+    //           ...item,
+    //           quantity: item.quantity + 1,
+    //         };
+    //       }
+    //       return item;
+    //     });
+
+    //     setCartData(cart);
+    //     localStorage.setItem('cart', JSON.stringify(cart));
+    //     console.log('Incremented quantity for product:', productIdNum);
+    //   } else {
+    //     try {
+    //       const response = await axios.get(
+    //         `https://dummyjson.com/products/${productIdNum}`
+    //       );
+
+    //       const productdata = {
+    //         ProductId: response.data.id,
+    //         title: response.data.title,
+    //         price: response.data.price,
+    //         thumbnail: response.data.thumbnail,
+    //       };
+
+    //       const newItem = {
+    //         productdata,
+    //         quantity: 1,
+    //       };
+
+    //       cart = [...cart, newItem];
+    //       setCartData(cart);
+    //       localStorage.setItem('cart', JSON.stringify(cart));
+    //       console.log('Product added to cart:', productdata);
+    //     } catch (error) {
+    //       console.error('Error fetching product:', error);
+    //     }
+    //   }
+    // }
 
     // useEffect(() => {
     //     setCartData(JSON.parse(localStorage.getItem('cart')))
     //     fetchSingleProductFromDummyJson()
     // }, [])
 
-    // async function fetchSingleProductFromDummyJson() {
-    //     const response = await axios.get(`https://dummyjson.com/products/${cartData.id}`)
-    //     console.log(response.data)
-    // }
+    async function fetchSingleProductFromDummyJson() {
+        const response = await axios.get(`https://dummyjson.com/products/${cartData.id}`)
+        console.log(response.data)
+    }
     return (
         <div>
             <div className='w-full h-[300px] relative '>
@@ -110,6 +126,24 @@ const Cart = () => {
                     <h1 className='text-sm'>Success</h1>
                 </div>
             </div>
+
+            {
+                cartData?.map((item) => {
+                    console.log(item)
+                    return (
+                        <div>
+                            <img 
+                            className='w-[200px]'
+                            src={item.product.images[0]} alt="" />
+                            <h1 className='font-semibold'>{item.product.title}</h1>
+                            <p>Price: ${item.product.price}</p>
+                            <p>Quantity: {item.quantity}</p>
+                           
+                        </div>
+                    )
+                })
+            }
+
         </div>
     )
 }

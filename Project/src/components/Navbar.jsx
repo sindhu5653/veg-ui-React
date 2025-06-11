@@ -24,30 +24,10 @@ const Navbar = () => {
     document.addEventListener('mousedown', handleClickOutside);
 
 
-    //   // Cleanup on unmount
     return () => {
       document.removeEventListener('mousedown', handleClickOutside);
     };
   }, []);
-
-  useEffect(() => {
-  const updateCartQuantity = () => {
-    const cart = JSON.parse(localStorage.getItem('cart')) || [];
-    const total = cart.reduce((acc, item) => acc + item.quantity, 0);
-    setTotalQuantity(total);
-  };
-
-  updateCartQuantity(); 
-  const interval = setInterval(updateCartQuantity, 1000); 
-
-  window.addEventListener('storage', updateCartQuantity);
-
-  return () => {
-    clearInterval(interval);
-    window.removeEventListener('storage', updateCartQuantity);
-  };
-}, []);
-
 
 
   return (
@@ -82,11 +62,6 @@ const Navbar = () => {
           <div className='relative'>
             <Link to="/cart">
               <BsHandbag className=' hover:text-green-400' />
-              {totalQuantity > 0 && (
-                <span className="absolute -top-2 -right-2 bg-red-500 text-white text-xs w-5 h-5 flex items-center justify-center rounded-full">
-                  {totalQuantity}
-                </span>
-              )}
             </Link>
           </div>
           <div className='relative' ref={myRef}>

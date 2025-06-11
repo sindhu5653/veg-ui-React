@@ -22,7 +22,7 @@ const About = () => {
           </div>
 
           <div className='w-1/2 gap-2 mt-10'>
-            <h1 className='text-3xl font-bold'>Our Story</h1>
+            <h1 className='text-3xl font-bold '>Our Story</h1>
             <p className='text-2xl'>
               Lorem ipsum, dolor sit amet consectetur adipisicing elit. Beatae laboriosam atque sunt pariatur dolores obcaecati quae doloremque non deserunt doloribus ex, quas fugit facere earum odio nesciunt. Id, assumenda ea!
             </p>

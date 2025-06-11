@@ -17,9 +17,6 @@ const User = () => {
       <Link to="/" className='hover:bg-green-500 font-semibold w-full px-4 py-1 cursor-pointer'>
         Logout
       </Link > 
-      <Link to="/" className='hover:bg-green-500 font-semibold w-full px-4 py-1 cursor-pointer'>
-        Signout
-      </Link>
     </div>
   );
 };
