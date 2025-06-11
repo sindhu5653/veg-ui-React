@@ -5,7 +5,6 @@ import { Link, useNavigate } from 'react-router-dom';
 
 const Card = ({ item }) => {
   const navigate = useNavigate();
-  const [show, setShow] = useState(false);
   const [cartItems, setCartitems] = useState([])
 
   const handleClick = () => {

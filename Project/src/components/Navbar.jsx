@@ -79,7 +79,7 @@ const Navbar = () => {
         <div className='flex flex-row gap-8 text-2xl mt-4'>
           <div className='relative'>
             <Link to="/cart">
-            <span className='absolute text-sm top-[-18px] right-[-10px] bg-green-500 text-white rounded-full px-1'>{totalQuantity}</span>
+            <span className='absolute text-sm top-[-18px] right-[-10px] bg-[#2de089] text-white rounded-full px-1'>{totalQuantity}</span>
               <BsHandbag className=' hover:text-green-400' />
             </Link>
           </div>

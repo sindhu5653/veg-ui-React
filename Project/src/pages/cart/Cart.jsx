@@ -10,10 +10,8 @@ import Shipping from '../../components/shipping/Shipping';
 import Payment from '../../components/payment/Payment';
 import Success from '../../components/success/Success';
 
-
 const Cart = () => {
     const [cartData, setCartData] = useState([]);
-    const [showCart, setShowCart] = useState(false);
     const [showAll, setShowAll] = useState('cart');
 
     useEffect(() => {
@@ -142,30 +140,71 @@ const Cart = () => {
             </div>
 
 
-            {showAll === 'cart' && (
-                cartData?.map((item, index) => (
-                    <div key={item.product?.id || index} className='flex gap-10 p-4 border'>
-                        <div className='flex items-center gap-4 w-[500px]'>
-                            <img
-                                className='w-[80px] h-[80px] object-cover'
-                                src={item.product?.images?.[0]}
-                                alt={item.product?.title || "Product"}
-                            />
-                            <h1 className='font-semibold'>{item.product?.title}</h1>
+            <div className='mt-8 mx-auto w-fit border'>
+                {showAll === 'cart' && (
+                    <>
+                        <div className='flex gap-10 p-4 border-b font-bold text-gray-700'>
+                            <div className='w-[500px]'>Product</div>
+                            <div className='w-[150px]'>Quantity</div>
+                            <div className='w-[150px]'>Price</div>
+                            <div>Total Price</div>
                         </div>
-                        <div className='flex items-center gap-2 w-[300px]'>
-                            <p>Price: ${item.product?.price}</p>
-                        </div>
-                        <div className='flex items-center gap-2'>
-                            <p>Quantity: {item.quantity}</p>
-                        </div>
-                    </div>
-                ))
-            )}
 
-            {showAll === 'shipping' && <Shipping />}
-            {showAll === 'payment' && <Payment />}
-            {showAll === 'success' && <Success />}
+                        {cartData?.map((item, index) => (
+                            <div key={item.product?.id || index} className='flex gap-10 p-4 border-b'>
+                                <div className='flex items-center w-[500px]'>
+                                    <img
+                                        className='w-[80px] h-[80px] object-cover'
+                                        src={item.product?.images?.[0]}
+                                        alt="image" />
+                                    <h1 className='font-semibold'>{item.product?.title}</h1>
+                                </div>
+
+                                
+                                <div className='flex gap-20 '>
+                                    <div className='flex items-center justify-center gap-2 border border-green-400 rounded-md w-fit h-fit mt-5 '>
+                                    <button
+                                        onClick={() => handleDecrement(index)}
+                                        className='px-2 py-1 border rounded-md bg-[#2de089] text-white hover:bg-black hover:text-[#2de089]'
+                                    >
+                                        -
+                                    </button>
+                                    <span className='w-8 text-center'>{item.quantity}</span>
+                                    <button
+                                        onClick={() => handleIncrement(index)}
+                                        className='px-2 py-1 border rounded-md bg-[#2de089] text-white hover:bg-black hover:text-[#2de089]'
+                                    >
+                                        +
+                                    </button>
+                                </div>
+
+                                <div className='flex items-center w-[150px]'>
+                                    <p>${item.product?.price}</p>
+                                </div>
+                                <div className='flex items-center'>
+                                    <p>${(item.product?.price * item.quantity).toFixed(2)}</p>
+                                </div>
+                                </div>
+                            </div>
+                        ))}
+                    </>
+                )}
+            </div>
+
+
+            {showAll === 'shipping' && <Shipping setShowAll={setShowAll} />}
+            {showAll === 'payment' && <Payment setShowAll={setShowAll} />}
+            {showAll === 'success' && <Success setShowAll={setShowAll} />}
+
+            {showAll === 'cart' && (
+                <div className='flex justify-center gap-5 mt-8 mb-5 mx-auto'>
+                    <button
+                        className='border text-center rounded px-4 py-2 w-[100px] bg-[#2de089] text-white hover:bg-black hover:text-[#2de089]'
+                        onClick={() => setShowAll('shipping')}>
+                        Next
+                    </button>
+                </div>
+            )}
 
         </div>
     );
