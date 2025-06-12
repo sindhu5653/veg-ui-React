@@ -29,6 +29,24 @@ const Navbar = () => {
     };
   }, []);
 
+  const totalItems=()=>{
+    let cart=JSON.parse(localStorage.getItem('cart'))
+    if(cart){
+      let total=0
+      cart.forEach(item => {
+          total+=item.quantity
+      });
+      setTotalQuantity(total)
+    }
+    else{
+      setTotalQuantity(0)
+    }
+  }
+
+  useEffect(()=>{
+    totalItems()
+  },[])
+
 
   return (
     <div>
@@ -61,6 +79,7 @@ const Navbar = () => {
         <div className='flex flex-row gap-8 text-2xl mt-4'>
           <div className='relative'>
             <Link to="/cart">
+            <span className='absolute text-sm top-[-18px] right-[-10px] bg-green-500 text-white rounded-full px-1'>{totalQuantity}</span>
               <BsHandbag className=' hover:text-green-400' />
             </Link>
           </div>

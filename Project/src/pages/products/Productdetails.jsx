@@ -33,6 +33,48 @@ const Productdetails = () => {
         }
     }
 
+    const addtocart=()=>{
+        let cart=JSON.parse(localStorage.getItem('cart'))
+
+        if(cart){
+            let itemExist=cart.find(item=>item.productdata.productId===productdata.productId)
+            if(itemExist){
+                cart=cart.map(item=>{
+                    if(item.productdata.productId===productdata.productId){
+                        return{
+                            ...item,
+                            quantity:item.quantity+count
+                        }
+                    }
+                    else{
+                        return item
+                    }
+                })
+                localStorage.setItem('cart',JSON.stringify(cart))
+            }
+            else{
+                cart=[
+                     ...cart,
+                    {
+                      productdata,quantity:count  
+                    }
+                ]
+                localStorage.setItem('cart',JSON.stringify(cart))
+            }
+        }
+        else{
+            cart=[{
+                productdata,
+                quantity:count
+        }]
+
+        // console.log(cart);
+        localStorage.setItem('cart',JSON.stringify(cart))
+        
+        }
+        toast.success("Added to Item")
+    }
+
 
     return (
         <div>
@@ -75,7 +117,7 @@ const Productdetails = () => {
                             <div className='flex flex-col sm:flex-row gap-4 w-full mt-6'>
                                 <div className='bg-[#2de089] text-white px-2 py-3 font-semibold hover:bg-black hover:text-green-500'>
                                     <button className='w-[150px]'
-                                        onClick={() => toast.success("Added to cart!")}>Add to Cart</button>
+                                        onClick={() => {addtocart()}}>Add to Cart</button>
                                 </div>
                                 <div className='bg-[#2de089] text-white px-2 py-3 font-semibold hover:bg-black hover:text-green-500'>
                                     <button className='w-[150px]'>Buy Now</button>
